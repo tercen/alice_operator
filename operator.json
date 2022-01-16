@@ -1,9 +1,9 @@
 {
-  "name": "Template_R_operator",
-  "description": "Calculate the mathamatical average of the data points in a cell.",
-  "tags": ["basic statistics"],
-  "authors": ["tercen"],
-  "urls": ["https://github.com/tercen/template_R_operator"],
+  "name": "ALICE_R_operator",
+  "description": "Apply the ALICE (antigen-specific Lymphocyte Identification by Clustering of Expanded sequences) algorithm.",
+  "tags": ["ALICE", "statistics"],
+  "authors": ["William van Doorn"], 
+  "urls": ["https://github.com/tercen/alice_R_operator"],
   "properties": []
 }
 
