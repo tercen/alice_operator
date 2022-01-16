@@ -1,38 +1,27 @@
-# Template R operator
-
-The `Template R operator` is a template repository for the creation of R operators in Tercen. An overview of steps for developing an operator are:
-
-1. create a github repo
-2. install tercen_studio
-3. login to tercen_studio
-4. git clone the newly created repo
-5. start developing in R in tercen_studio
-6. add R packages to the repo
-7. push to the github repo
-8. go to tercen and install the operator
-
-More information can be found in [Tercen app builder's guide](https://tercen.github.io/appbuilders-guide/).
-
-Below is the operator README standard structure:
+# Alice R operator
 
 ##### Description
 
-The `Template R operator` is a template repository for the creation of R operators in Tercen.
+The `Alice R operator` applies the ALICE algorithm to TCR sequences. The ALICE algorithm 
+operates on a dataset of n unique nucleotide TCR sequences (clonotypes) with a 
+given VJ combination. The procedure is then applied to all VJ combinations present in the data. Unique nucleotide sequences have corresponding amino acid sequences. 
+The goal is to find outlying sequences that have an abnormal number of nucleotide 
+variants in the data that differ by at most one amino acid.
+
+More information can be found in the original [paper](https://www.biorxiv.org/content/10.1101/375162v1). 
 
 ##### Usage
 
 Input projection|.
 ---|---
-`x-axis`        | type, description 
-`y-axis`        | type, description 
-`row`           | type, description 
-`column`        | type, description 
-`colors`        | type, description 
-`labels`        | type, description 
+`column`        | string, nucleotide sequences of TCR genes
+`colors`        | numbers, the Read.count and Read.proportion variables
+`labels`        | string, containing gene information including the amino acid
+sequences, the best VGenes and best J Genes.
 
 Input parameters|.
 ---|---
-`input_var`        | parameter description
+`input_var`        | will be supported soon
 
 Output relations|.
 ---|---
@@ -41,10 +30,26 @@ Output relations|.
 
 ##### Details
 
-Details on the computation.
+The algortihm operates on a dataset of n unique nucleotide TCR sequences (clonotypes) 
+with a given VJ combination. The procedure is then applied to all VJ combinations present in the data. Unique nucleotide sequences have corresponding amino acid sequences. 
+The goal is to find outlying sequences that have an abnormal number
+of nucleotide variants in the data that differ by at most one amino acid.  
+  
+For each amino acid sequence σ, under the null hypothesis we expect the number 
+of neighbours d to be Poisson distributed The sum is over all possible similar 
+variants σ 0 of σ. Here, similarity σ 0 ∼ σ is defined by having at most one 
+amino acid mismatch, but other measures could be used instead. Pgen(σ0) is
+the probability to generate a given amino acid sequence σ 0 by V(D)J recombination, 
+and Q a rescaling factor accounting for thymic selection which eliminates a 
+fraction 1/Q of generated sequences. Its value was set to Q = 9.41 as the 
+average over all VJ combinations reported.
+
+##### Screenshots
+![Example of application](/static/screenshot.PNG?raw=true "Example of application")
 
 ##### See Also
 
 [template_shiny_operator](https://github.com/tercen/template_shiny_operator)
-, [template_docker_operator](https://github.com/tercen/template_docker_operator)
+, [original ALICE implementation](https://github.com/pogorely/ALICE), 
+[paper](https://www.biorxiv.org/content/10.1101/375162v1)
 
