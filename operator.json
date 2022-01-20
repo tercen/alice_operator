@@ -4,7 +4,51 @@
   "tags": ["ALICE", "statistics"],
   "authors": ["William van Doorn"], 
   "urls": ["https://github.com/tercen/alice_R_operator"],
-  "properties": []
+  "properties": [
+      {
+    "kind": "StringProperty",
+    "name": "rankVar",
+    "defaultValue": "NULL" ,
+    "description": "rankVar variable of the ALICE algorithm"
+      },
+      {
+    "kind": "StringProperty",
+    "name": "readCount",
+    "defaultValue": "NULL" ,
+    "description": "readCount variable of the ALICE algorithm"
+      },
+      {
+    "kind": "StringProperty",
+    "name": "readProportion"
+    "defaultValue": "NULL" ,
+    "description": "readProportion variable of the ALICE algorithm"
+      },
+      {
+    "kind": "StringProperty",
+    "name": "nucleotideSeq",
+    "defaultValue": "NULL" ,
+    "description": "nucleotideSeq variable of the ALICE algorithm"
+      },
+      {
+    "kind": "StringProperty",
+    "name": "aminoacidSeq",
+    "defaultValue": "NULL" ,
+    "description": "aminoacidSeq variable of the ALICE algorithm"
+      },
+      {
+    "kind": "StringProperty",
+    "name": "bestVGene",
+    "defaultValue": "NULL" ,
+    "description": "bestVGene variable of the ALICE algorithm"
+      },
+      {
+    "kind": "StringProperty",
+    "name": "bestJGene",
+    "defaultValue": "NULL" ,
+    "description": "bestJGene variable of the ALICE algorithm"
+      },
+    }
+  ]
 }
 
 
