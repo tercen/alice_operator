@@ -8,7 +8,7 @@ source("R/ALICE.R")
 # http://localhost:5402/admin/w/4268ffd55d3487c8c40b156b3f00969f/ds/b4edd608-fb17-4075-8e6f-c2ff34a39495
 
 options("tercen.workflowId" = "4268ffd55d3487c8c40b156b3f00969f")
-options("tercen.stepId"     = "b4edd608-fb17-4075-8e6f-c2ff34a39495")
+options("tercen.stepId"     = "94d8f51a-ddc3-4c18-ba77-5e40ca55cd81")
 
 getOption("tercen.workflowId")
 getOption("tercen.stepId")
@@ -57,8 +57,20 @@ if (as.character(ctx$op.value('bestJGene')) != "NULL") {
   stop("bestJGene not supplied")
 }
 
-ctx %>%
-  select() %>%
+tableId <- ctx$rselect()[[1]]
+df <- ctx$client$tableSchemaService$select(tableId)
+df <- as.data.frame(as_tibble(df))
+
+# rename column names
+names(df)[names(df) == rankVar] <- 'Rank'
+names(df)[names(df) == readCount] <- 'Read.count'
+names(df)[names(df) == rankVar] <- 'Read.proportion'
+names(df)[names(df) == nucleotideSeq] <- 'CDR3.nucleotide.sequence'
+names(df)[names(df) == aminoacidSeq] <- 'CDR3.amino.acid.sequence'
+names(df)[names(df) == bestVGene] <- 'bestVGene'
+names(df)[names(df) == bestJGene] <- 'bestJGene'
+
+df %>%
   data.table() %>%
   list %>%
   ALICE_pipeline(
@@ -69,5 +81,7 @@ ctx %>%
     nrec = 5e5
   ) %>%
   as.data.frame() %>%
+  mutate(.tlbIdx = tableId) %>%
+  mutate(.ci = rep_len(0, nrow(.))) %>%
   ctx$addNamespace() %>%
   ctx$save()

@@ -10,12 +10,6 @@ if (as.character(ctx$op.value('rankVar')) != "NULL") {
   stop("rankVar not supplied")
 }
 
-if (as.character(ctx$op.value('rankVar')) != "NULL") {
-  rankVar <- as.character(ctx$op.value('rankVar'))
-} else {
-  stop("rankVar not supplied")
-}
-
 if (as.character(ctx$op.value('readCount')) != "NULL") {
   readCount <- as.character(ctx$op.value('readCount'))
 } else {
@@ -52,8 +46,20 @@ if (as.character(ctx$op.value('bestJGene')) != "NULL") {
   stop("bestJGene not supplied")
 }
 
-ctx %>%
-  select() %>%
+tableId <- ctx$rselect()[[1]]
+df <- ctx$client$tableSchemaService$select(tableId)
+df <- as.data.frame(as_tibble(df))
+
+# rename column names
+names(df)[names(df) == rankVar] <- 'Rank'
+names(df)[names(df) == readCount] <- 'Read.count'
+names(df)[names(df) == rankVar] <- 'Read.proportion'
+names(df)[names(df) == nucleotideSeq] <- 'CDR3.nucleotide.sequence'
+names(df)[names(df) == aminoacidSeq] <- 'CDR3.amino.acid.sequence'
+names(df)[names(df) == bestVGene] <- 'bestVGene'
+names(df)[names(df) == bestJGene] <- 'bestJGene'
+
+df %>%
   data.table() %>%
   list %>%
   ALICE_pipeline(
@@ -64,5 +70,7 @@ ctx %>%
     nrec = 5e5
   ) %>%
   as.data.frame() %>%
+  mutate(.tlbIdx = tableId) %>%
+  mutate(.ci = rep_len(0, nrow(.))) %>%
   ctx$addNamespace() %>%
   ctx$save()
