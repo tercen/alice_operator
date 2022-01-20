@@ -47,7 +47,6 @@
     "defaultValue": "NULL" ,
     "description": "bestJGene variable of the ALICE algorithm"
       },
-    }
   ]
 }
 
