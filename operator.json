@@ -7,21 +7,9 @@
   "properties": [
       {
     "kind": "StringProperty",
-    "name": "rankVar",
-    "defaultValue": "NULL" ,
-    "description": "rankVar variable of the ALICE algorithm"
-      },
-      {
-    "kind": "StringProperty",
     "name": "readCount",
     "defaultValue": "NULL" ,
     "description": "readCount variable of the ALICE algorithm"
-      },
-      {
-    "kind": "StringProperty",
-    "name": "readProportion",
-    "defaultValue": "NULL" ,
-    "description": "readProportion variable of the ALICE algorithm"
       },
       {
     "kind": "StringProperty",
