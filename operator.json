@@ -19,7 +19,7 @@
       },
       {
     "kind": "StringProperty",
-    "name": "readProportion"
+    "name": "readProportion",
     "defaultValue": "NULL" ,
     "description": "readProportion variable of the ALICE algorithm"
       },
